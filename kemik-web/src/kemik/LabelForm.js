@@ -26,7 +26,7 @@ class LabelForm extends Component {
     }
 
     getLabelTypes = () => {
-        fetch('http://localhost:9999/data/data/labels?labelCode=havadis')
+        fetch('http://95.183.194.53:9999/data/data/labels?labelCode=havadis')
             .then(response => {
                 return response.json();
             })
@@ -39,7 +39,7 @@ class LabelForm extends Component {
 
     getNewTweet = () => {
 
-        fetch('http://localhost:9999/data/tweets/simple-data', {
+        fetch('http://95.183.194.53:9999/data/tweets/simple-data', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -95,7 +95,7 @@ class LabelForm extends Component {
 
     handleLabelSubmit = (event) => {
         event.preventDefault();
-        fetch('http://localhost:9999/data/tweets/label-informations', {
+        fetch('http://95.183.194.53:9999/data/tweets/label-informations', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
