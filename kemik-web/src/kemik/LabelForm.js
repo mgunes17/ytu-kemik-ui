@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class LabelForm extends Component {
 
     constructor(props) {
@@ -128,14 +129,11 @@ class LabelForm extends Component {
 
                 {this.state.usernameStatus &&
                     <form onSubmit={this.handleCandidateSubmit}>
-                        <label>
-                            Kullanıcı Adı:<br />
-                            <input
-                                type="text"
+                        <label>Kullanıcı Adı:</label>
+                        <input  type="text"
                                 name="username"
-                                onChange={this.handleUsernameChange} /> <br />
-                        </label>
-                        <input type="submit" value="Submit" /><br />
+                                onChange={this.handleUsernameChange} />
+                        <input type="submit" value="Submit" />
                     </form>
                 }
 
@@ -143,13 +141,13 @@ class LabelForm extends Component {
                     <div>
                         <p>{this.state.tweetContent}</p>
                         <form onSubmit={this.handleLabelSubmit} ref={(el) => this.myFormRef = el}>
-                            <label>
-                                Etiket:<br />
-                                <select name="labelSelect" onChange={this.handleLabelChange}>
+                            <div className="form-group">
+                                <label>Etiket:</label>
+                                <select className="custom-select form-control-lg" name="labelSelect" onChange={this.handleLabelChange}>
                                     {this.state.labelTypeList.map(labelType => <option key={labelType} value={labelType}>{labelType}</option>)}
-                                </select> <br />
-                            </label>
-                            <input type="submit" value="Submit" /><br />
+                                </select>
+                            </div>
+                            <button  className="btn btn-lg btn-primary" type="submit">Submit</button>
                         </form>
                     </div>
                 }

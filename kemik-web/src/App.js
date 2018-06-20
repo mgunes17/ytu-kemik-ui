@@ -11,7 +11,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Veriseti Etiketleme</h1>
         </header>
-        <div>
+        <div className="container">
           <LabelForm/>
         </div>
       </div>
