@@ -49,7 +49,7 @@ class LabelForm extends Component {
         }).then(response => {
             return response.json();
         }).then(data => {
-            if (data) {
+            if (data && Array.isArray(data)) {
                 this.setState({
                     tweetContent: data[0].content,
                     tweetId: data[0].simpleDataId
@@ -57,7 +57,8 @@ class LabelForm extends Component {
             } else {
                 alert("veri yok")
             }
-
+        }).catch(err => {
+            alert("Bir hata oldu.")
         })
 
         this.setState({
