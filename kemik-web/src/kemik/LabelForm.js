@@ -18,7 +18,7 @@ class LabelForm extends Component {
             labeledCount: 0
         }
 
-        this.backendHost = "https://kalem.app:9998"
+        this.backendHost = "http://localhost:9999"
     }
 
     componentDidMount() {
@@ -26,7 +26,10 @@ class LabelForm extends Component {
     }
 
     getUserLabelCount = () => {
-        fetch(this.backendHost+'/data/')
+        return fetch(this.backendHost+'/data/data/userLabelCount?username='+this.state.username)
+        .then(response => {
+            return response.json();
+        })
     }
 
     getNewTweet = () => {
@@ -70,7 +73,10 @@ class LabelForm extends Component {
                 labelStatus: true,
                 usernameStatus: false
             });
-
+            this.getUserLabelCount()
+            .then(data => {
+                this.setState({ labeledCount: data });
+            });
             this.getNewTweet();
         }
     }
