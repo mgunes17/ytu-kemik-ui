@@ -18,7 +18,7 @@ class LabelForm extends Component {
             labeledCount: 0
         }
 
-        this.backendHost = "https://kalem.app:9998"
+        this.backendHost = "http://localhost:9999"
     }
 
     componentDidMount() {
@@ -26,7 +26,10 @@ class LabelForm extends Component {
     }
 
     getUserLabelCount = () => {
-        fetch(this.backendHost+'/data/')
+        return fetch(this.backendHost+'/data/data/userLabelCount?username='+this.state.username)
+        .then(response => {
+            return response.json();
+        })
     }
 
     getNewTweet = () => {
@@ -70,7 +73,10 @@ class LabelForm extends Component {
                 labelStatus: true,
                 usernameStatus: false
             });
-
+            this.getUserLabelCount()
+            .then(data => {
+                this.setState({ labeledCount: data });
+            });
             this.getNewTweet();
         }
     }
@@ -129,13 +135,13 @@ class LabelForm extends Component {
                         <p>{this.state.tweetContent}</p>
                         <div>
                             <div>
-                                <button className="btn btn-lg" value="POSITIVE" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-smile"></i></button>
-                                <button className="btn btn-lg" value="NOTR" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-meh"></i></button>
-                                <button className="btn btn-lg" value="NEGATIVE" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-angry"></i></button>
+                                <button className="btn btn-lg" value="POSITIVE" onClick={this.handleLabelButtonClick}><i className="far fa-2x fa-smile"></i></button>
+                                <button className="btn btn-lg" value="NOTR" onClick={this.handleLabelButtonClick}><i className="far fa-2x fa-meh"></i></button>
+                                <button className="btn btn-lg" value="NEGATIVE" onClick={this.handleLabelButtonClick}><i className="far fa-2x fa-angry"></i></button>
                             </div>
                             <div>
-                                <button className="btn btn-lg" value="FREE" onClick={this.handleLabelButtonClick}><i className="fas fa-4x fa-question"></i></button>
-                                <button className="btn btn-lg" value="BOT" onClick={this.handleLabelButtonClick}><i className="fas fa-4x fa-robot"></i></button>
+                                <button className="btn btn-lg" value="FREE" onClick={this.handleLabelButtonClick}><i className="fas fa-2x fa-question"></i></button>
+                                <button className="btn btn-lg" value="BOT" onClick={this.handleLabelButtonClick}><i className="fas fa-2x fa-robot"></i></button>
                             </div>
                         </div>
                     </div>
