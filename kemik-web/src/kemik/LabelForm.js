@@ -10,10 +10,8 @@ class LabelForm extends Component {
             username: '',
             projectName: 'havadis',
             tweetCount: 1,
-            labelTypeList: [],
             labelStatus: false,
             tweetContent: '',
-            selectedLabel: '',
             tweetId: '',
             usernameStatus: true,
             candidataTweet: {},
@@ -24,24 +22,11 @@ class LabelForm extends Component {
     }
 
     componentDidMount() {
-        this.getLabelTypes();
+        
     }
-
 
     getUserLabelCount = () => {
         fetch(this.backendHost+'/data/')
-    }
-
-    getLabelTypes = () => {
-        fetch(this.backendHost+'/data/data/labels?labelCode=havadis')
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                this.setState({
-                    labelTypeList: data
-                })
-            })
     }
 
     getNewTweet = () => {
@@ -68,11 +53,6 @@ class LabelForm extends Component {
         }).catch(err => {
             alert("Bir hata oldu.")
         })
-
-        this.setState({
-            selectedLabel: 'POSITIVE'
-        })
-
     }
 
     handleCandidateSubmit = (event) => {
@@ -93,11 +73,6 @@ class LabelForm extends Component {
     handleUsernameChange = (event) => {
         event.preventDefault();
         this.setState({ username: event.target.value })
-    }
-
-    handleLabelChange = (event) => {
-        event.preventDefault();
-        this.setState({ selectedLabel: event.target.value })
     }
 
     handleLabelButtonClick = (event) => {
