@@ -128,34 +128,6 @@ class LabelForm extends Component {
         this.getNewTweet();
     }
 
-    handleLabelSubmit = (event) => {
-        event.preventDefault();
-        fetch(this.backendHost+'/data/tweets/label-informations', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                'labeledTweetDTOList': [
-                    {
-                        'labelType': this.state.selectedLabel,
-                        'simpleDataId': this.state.tweetId
-                    }
-                ],
-                'username': this.state.username
-            })
-        }).then(response => {
-            if (response.ok) {
-                let labeledCount = this.state.labeledCount;
-                this.setState({ labeledCount: labeledCount + 1 })
-            } else {
-                alert("başarısız");
-
-            }
-        })
-
-        this.myFormRef.reset();
-        this.getNewTweet();
-    }
-
     render() {
         return (
             <div>
