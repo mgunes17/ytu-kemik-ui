@@ -19,14 +19,21 @@ class LabelForm extends Component {
             candidataTweet: {},
             labeledCount: 0
         }
+
+        this.backendHost = "https://kalem.app:9998"
     }
 
     componentDidMount() {
         this.getLabelTypes();
     }
 
+
+    getUserLabelCount = () => {
+        fetch(this.backendHost+'/data/')
+    }
+
     getLabelTypes = () => {
-        fetch('http://95.183.194.53:9999/data/data/labels?labelCode=havadis')
+        fetch(this.backendHost+'/data/data/labels?labelCode=havadis')
             .then(response => {
                 return response.json();
             })
@@ -39,7 +46,7 @@ class LabelForm extends Component {
 
     getNewTweet = () => {
 
-        fetch('http://95.183.194.53:9999/data/tweets/simple-data', {
+        fetch(this.backendHost+'/data/tweets/simple-data', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -93,9 +100,37 @@ class LabelForm extends Component {
         this.setState({ selectedLabel: event.target.value })
     }
 
+    handleLabelButtonClick = (event) => {
+        event.preventDefault();
+        var labelType = event.currentTarget.value;
+        fetch(this.backendHost+'/data/tweets/label-informations', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'labeledTweetDTOList': [
+                    {
+                        'labelType': labelType,
+                        'simpleDataId': this.state.tweetId
+                    }
+                ],
+                'username': this.state.username
+            })
+        }).then(response => {
+            if (response.ok) {
+                let labeledCount = this.state.labeledCount;
+                this.setState({ labeledCount: labeledCount + 1 })
+            } else {
+                alert("başarısız");
+
+            }
+        })
+
+        this.getNewTweet();
+    }
+
     handleLabelSubmit = (event) => {
         event.preventDefault();
-        fetch('http://95.183.194.53:9999/data/tweets/label-informations', {
+        fetch(this.backendHost+'/data/tweets/label-informations', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -140,15 +175,17 @@ class LabelForm extends Component {
                 {this.state.labelStatus === true &&
                     <div>
                         <p>{this.state.tweetContent}</p>
-                        <form onSubmit={this.handleLabelSubmit} ref={(el) => this.myFormRef = el}>
-                            <div className="form-group">
-                                <label>Etiket:</label>
-                                <select className="custom-select form-control-lg" name="labelSelect" onChange={this.handleLabelChange}>
-                                    {this.state.labelTypeList.map(labelType => <option key={labelType} value={labelType}>{labelType}</option>)}
-                                </select>
+                        <div>
+                            <div>
+                                <button className="btn btn-lg" value="POSITIVE" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-smile"></i></button>
+                                <button className="btn btn-lg" value="NOTR" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-meh"></i></button>
+                                <button className="btn btn-lg" value="NEGATIVE" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-angry"></i></button>
                             </div>
-                            <button  className="btn btn-lg btn-primary" type="submit">Submit</button>
-                        </form>
+                            <div>
+                                <button className="btn btn-lg" value="FREE" onClick={this.handleLabelButtonClick}><i className="fas fa-4x fa-question"></i></button>
+                                <button className="btn btn-lg" value="BOT" onClick={this.handleLabelButtonClick}><i className="fas fa-4x fa-robot"></i></button>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
