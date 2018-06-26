@@ -43,8 +43,13 @@ class LabelForm extends Component {
             return response.json();
         }).then(data => {
             if (data && Array.isArray(data)) {
+
+                var tweetContent = data[0].content;
+                // remove urls
+                tweetContent = tweetContent.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+
                 this.setState({
-                    tweetContent: data[0].content,
+                    tweetContent: tweetContent,
                     tweetId: data[0].simpleDataId
                 })
             } else {
