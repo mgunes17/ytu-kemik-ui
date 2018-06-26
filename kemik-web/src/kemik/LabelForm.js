@@ -129,13 +129,13 @@ class LabelForm extends Component {
                         <p>{this.state.tweetContent}</p>
                         <div>
                             <div>
-                                <button className="btn btn-lg" value="POSITIVE" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-smile"></i></button>
-                                <button className="btn btn-lg" value="NOTR" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-meh"></i></button>
-                                <button className="btn btn-lg" value="NEGATIVE" onClick={this.handleLabelButtonClick}><i className="far fa-4x fa-angry"></i></button>
+                                <button className="btn btn-lg" value="POSITIVE" onClick={this.handleLabelButtonClick}><i className="far fa-2x fa-smile"></i></button>
+                                <button className="btn btn-lg" value="NOTR" onClick={this.handleLabelButtonClick}><i className="far fa-2x fa-meh"></i></button>
+                                <button className="btn btn-lg" value="NEGATIVE" onClick={this.handleLabelButtonClick}><i className="far fa-2x fa-angry"></i></button>
                             </div>
                             <div>
-                                <button className="btn btn-lg" value="FREE" onClick={this.handleLabelButtonClick}><i className="fas fa-4x fa-question"></i></button>
-                                <button className="btn btn-lg" value="BOT" onClick={this.handleLabelButtonClick}><i className="fas fa-4x fa-robot"></i></button>
+                                <button className="btn btn-lg" value="FREE" onClick={this.handleLabelButtonClick}><i className="fas fa-2x fa-question"></i></button>
+                                <button className="btn btn-lg" value="BOT" onClick={this.handleLabelButtonClick}><i className="fas fa-2x fa-robot"></i></button>
                             </div>
                         </div>
                     </div>
