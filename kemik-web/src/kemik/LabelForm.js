@@ -18,7 +18,7 @@ class LabelForm extends Component {
             labeledCount: 0
         }
 
-        this.backendHost = "http://localhost:9999"
+        this.backendHost = "https://kalem.app:9998"
     }
 
     componentDidMount() {
